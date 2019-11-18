@@ -8,9 +8,15 @@ DEPLOYMENT_DIR="${MYHOME}/src/deployments"
 
 # name of project in which we are working
 PROJECT=${PROJECT:-istio-tutorial}
+ISTIO_NS=${ISTIO_NS:-istio-system}
 
-oc new-project ${PROJECT} || exit 1
+oc new-project ${PROJECT} || true
 oc adm policy add-scc-to-user privileged -z default -n ${PROJECT}
+oc adm policy add-scc-to-user anyuid -z default -n ${PROJECT}
+oc get ServiceMeshMemberRoll default -n ${ISTIO_NS} -o json | jq --arg PROJECT "${PROJECT}" '.spec.members[.spec.members | length] |= $PROJECT' | oc apply -f - -n ${ISTIO_NS}
+
+# deploy gateway
+oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/gateway.yaml
 
 # deploy customer
 oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/customer.yaml
@@ -20,9 +26,3 @@ oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/preference.yaml
 
 # deploy recommendation
 oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/recommendation.yaml
-
-# deploy gateway
-oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/gateway.yaml
-
-# deploy curl
-oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/curl.yaml
