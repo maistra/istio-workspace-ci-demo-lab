@@ -1,13 +1,17 @@
 package com.redhat.developer.demos.customer.rest;
 
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.ProcessingException;
+import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/")
 public class PreferenceResource {
@@ -32,7 +36,7 @@ public class PreferenceResource {
             return Response
                     .status(Response.Status.SERVICE_UNAVAILABLE)
                     .entity(String.format(RESPONSE_STRING_FORMAT,
-                            String.format("Error: %d - %s", response.getStatus(), response.readEntity(String.class)))
+                                          String.format("Error: %d - %s", response.getStatus(), response.readEntity(String.class)))
                     )
                     .build();
         } catch (ProcessingException ex) {
