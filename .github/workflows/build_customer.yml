@@ -1,12 +1,12 @@
-name: Build Customer
+name: Build
 
 on:
   pull_request:
     types: [opened, reopened, synchronize]
 
 jobs:
-  build:
-
+  build_customer:
+    name: Build Customer
     runs-on: ubuntu-latest
 
     steps:
@@ -17,3 +17,20 @@ jobs:
         java-version: 1.11
     - name: Build with Maven
       run: mvn clean package --file workshop/content/src/customer/ -DskipTests
+    - name: Build the Docker image
+      working-directory: workshop/content/src/customer
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build . --file Dockerfile --tag docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
+        docker push docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
+    - name: Deploy preview
+      uses: maistra/istio-workspace-action@master
+      with:
+        action: create
+        server: ${{ secrets.K8S_API_SERVER }}
+        token: ${{ secrets.K8S_TOKEN }}
+        session: ${{ github.head_ref }}
+        namespace: 
+        deployment: customer-v1
+        route: header:x-test-suite=aslak
+        image: docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
