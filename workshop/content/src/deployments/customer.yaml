@@ -67,12 +67,7 @@ spec:
   gateways:
   - customer-gateway
   http:
-  - match:
-    - uri:
-        exact: /quarkus-customer/
-    rewrite:
-      uri: /
-    route:
+  - route:
     - destination:
         host: customer
         port:
