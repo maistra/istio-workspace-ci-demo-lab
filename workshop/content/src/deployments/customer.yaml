@@ -18,8 +18,6 @@ spec:
         version: v1
       annotations:
         sidecar.istio.io/inject: "true"
-        sidecar.istio.io/proxyCPU: "500m"
-        sidecar.istio.io/proxyMemory: 400Mi
     spec:
       containers:
       - env:
