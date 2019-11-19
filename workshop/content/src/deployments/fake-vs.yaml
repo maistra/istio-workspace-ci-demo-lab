@@ -8,12 +8,7 @@ spec:
   gateways:
   - customer-gateway
   http:
-  - match:
-    - uri:
-        exact: /kubecon/
-    rewrite:
-      uri: /
-    route:
+  - route:
     - destination:
         host: customer
         subset: v1
@@ -22,7 +17,7 @@ spec:
     headers:
       request:
         add:
-          x-test-suite: feature-x
+          ike-session-id: feature-x
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -34,12 +29,7 @@ spec:
   gateways:
   - customer-gateway
   http:
-  - match:
-    - uri:
-        exact: /kubecon/
-    rewrite:
-      uri: /
-    route:
+  - route:
     - destination:
         host: customer
         subset: v1
@@ -48,4 +38,4 @@ spec:
     headers:
       request:
         add:
-          x-test-suite: feature-y
+          ike-session-id: feature-y
