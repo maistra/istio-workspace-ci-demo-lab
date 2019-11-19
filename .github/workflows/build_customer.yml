@@ -31,5 +31,5 @@ jobs:
         session: ${{ github.head_ref }}
         namespace: 
         deployment: customer-v1
-        route: header:x-test-suite=aslak
+        route: header:ike-session-id=${{ github.head_ref }}
         image: docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
