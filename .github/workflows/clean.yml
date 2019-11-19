@@ -1,0 +1,44 @@
+name: UnDeploy Preview
+
+on:
+  pull_request:
+    types: [unlabeled, closed]
+
+jobs:
+
+  customer-undeploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Undeploy customer
+      uses: maistra/istio-workspace-action@master
+      with:
+        action: delete
+        server: ${{ secrets.K8S_API_SERVER }}
+        token: ${{ secrets.K8S_TOKEN }}
+        session: ${{ github.head_ref }}
+        namespace: 
+        deployment: customer-v1
+  preference-undeploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Undeploy preference
+      uses: maistra/istio-workspace-action@master
+      with:
+        action: delete
+        server: ${{ secrets.K8S_API_SERVER }}
+        token: ${{ secrets.K8S_TOKEN }}
+        session: ${{ github.head_ref }}
+        namespace: 
+        deployment: preference-v1
+  recommendation-undeploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Undeploy recommendation
+      uses: maistra/istio-workspace-action@master
+      with:
+        action: delete
+        server: ${{ secrets.K8S_API_SERVER }}
+        token: ${{ secrets.K8S_TOKEN }}
+        session: ${{ github.head_ref }}
+        namespace: 
+        deployment: recommendation-v1

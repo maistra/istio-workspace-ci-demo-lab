@@ -1,4 +1,4 @@
-name: Build Customer
+name: Build Recommendation
 
 on:
   pull_request:
@@ -15,13 +15,13 @@ jobs:
       with:
         java-version: 1.11
     - name: Build with Maven
-      run: mvn clean package --file workshop/content/src/customer/ -DskipTests
+      run: mvn clean package --file workshop/content/src/recommendation/ -DskipTests
     - name: Build the Docker image
-      working-directory: workshop/content/src/customer
+      working-directory: workshop/content/src/recommendation
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build . --file Dockerfile --tag docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
-        docker push docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
+        docker build . --file Dockerfile --tag docker.io/aslakknutsen/lab-ossm-recommendation:${{ github.sha }}
+        docker push docker.io/aslakknutsen/lab-ossm-recommendation:${{ github.sha }}
     - name: Deploy preview
       uses: maistra/istio-workspace-action@master
       with:
@@ -30,6 +30,6 @@ jobs:
         token: ${{ secrets.K8S_TOKEN }}
         session: ${{ github.head_ref }}
         namespace: 
-        deployment: customer-v1
+        deployment: recommendation-v1
         route: header:x-test-suite=aslak
-        image: docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
+        image: docker.io/aslakknutsen/lab-ossm-recommendation:${{ github.sha }}
