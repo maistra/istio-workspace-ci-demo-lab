@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 @Path("/")
 public class RecommendationResource {
 
-    private static final String RESPONSE_STRING_FORMAT = "recommendation %s from '%s': %d\n";
+    private static final String RESPONSE_STRING_FORMAT = "recommendation KUBECON %s from '%s': %d\n";
 
     private static final String RESPONSE_STRING_NOW_FORMAT = "recommendation v3 %s from '%s': %d\n";
 
