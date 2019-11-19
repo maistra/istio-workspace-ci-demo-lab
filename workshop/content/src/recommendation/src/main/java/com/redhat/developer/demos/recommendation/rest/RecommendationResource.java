@@ -54,17 +54,8 @@ public class RecommendationResource {
     }
 
     @GET
-    public Response getRecommendations(@Context HttpHeaders headers) {
+    public Response getRecommendations() {
         count++;
-        String session = "undefined";
-        if (!headers.getRequestHeader("ike-session-id").isEmpty()) {
-            session = headers.getRequestHeader("ike-session-id").get(0);
-        } else {
-            headers.getRequestHeaders().forEach((k, v) -> {
-                logger.info(String.format("[%s]: %s", k, v));
-            });
-        }
-        logger.info(String.format("[ike-session-id]: %s", session));
         logger.info(String.format("recommendation request from %s: %d", HOSTNAME, count));
 
         if (timeout > 0) {
