@@ -3,6 +3,8 @@ name: Build Customer
 on:
   pull_request:
     types: [opened, reopened, synchronize]
+    paths:
+      - 'workshop/content/src/customer/*'
 
 jobs:
   build:
