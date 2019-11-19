@@ -19,6 +19,15 @@ public class BaggageHeadersFactory implements ClientHeadersFactory {
         headers.putSingle("user-location", userLocation);
         String ikeSession = incomingHeaders.getFirst("ike-session-id");
         headers.putSingle("ike-session-id", ikeSession);
+
+        headers.putSingle("x-request-id", incomingHeaders.getFirst("x-request-id"));
+        headers.putSingle("x-b3-traceid", incomingHeaders.getFirst("x-b3-traceid"));
+        headers.putSingle("x-b3-spanId", incomingHeaders.getFirst("x-b3-spanId"));
+        headers.putSingle("x-b3-parentspanid", incomingHeaders.getFirst("x-b3-parentspanid"));
+        headers.putSingle("x-b3-sampled", incomingHeaders.getFirst("x-b3-sampled"));
+        headers.putSingle("x-b3-flags", incomingHeaders.getFirst("x-b3-flags"));
+        headers.putSingle("b3", incomingHeaders.getFirst("b3"));
+
         return headers;
     }
 
