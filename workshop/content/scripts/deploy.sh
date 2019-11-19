@@ -7,7 +7,7 @@ MYHOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd -P)"
 DEPLOYMENT_DIR="${MYHOME}/src/deployments"
 
 # name of project in which we are working
-PROJECT=${PROJECT:-kubecon-demo}
+PROJECT=${PROJECT:-workspace-demo}
 ISTIO_NS=${ISTIO_NS:-service-mesh-1}
 
 oc new-project ${PROJECT} || true
