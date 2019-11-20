@@ -3,6 +3,8 @@ name: Build Recommendation
 on:
   pull_request:
     types: [opened, reopened, synchronize]
+    paths:
+      - 'workshop/content/src/recommendation/*'
 
 jobs:
   build:

@@ -3,8 +3,6 @@ name: Build Preference
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    paths:
-      - 'workshop/content/src/preference/*'
 
 jobs:
   build:
