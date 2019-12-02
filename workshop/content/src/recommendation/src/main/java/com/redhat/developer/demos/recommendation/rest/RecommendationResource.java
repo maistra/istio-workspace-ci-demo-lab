@@ -1,27 +1,17 @@
 package com.redhat.developer.demos.recommendation.rest;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Path("/")
 public class RecommendationResource {
 
-    private static final String RESPONSE_STRING_FORMAT = "recommendation %s from '%s': %d\n";
-
-    private static final String RESPONSE_STRING_NOW_FORMAT = "recommendation v3 %s from '%s': %d\n";
+    private static final String RESPONSE_STRING_FORMAT = "[HELLO BJUG FROM TELEPRESENCE] recommendation %s from '%s': %d\n";
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -67,7 +57,6 @@ public class RecommendationResource {
             return doMisbehavior();
         }
         return Response.ok(String.format(RESPONSE_STRING_FORMAT, VERSION, HOSTNAME, count)).build();
-        // return Response.ok(String.format(RESPONSE_STRING_NOW_FORMAT, getNow(), HOSTNAME, count)).build();
     }
 
     private void sleep(final long timeout) {
@@ -106,13 +95,6 @@ public class RecommendationResource {
         this.timeout = timeout*1000L;
         logger.debug("'timeout' has been set to " + timeout + " seconds");
         return Response.ok("Timeout has been set to " + timeout + " seconds\n").build();
-    }
-
-    private String getNow() {
-        final Client client = ClientBuilder.newClient();
-        final Response res = client.target("http://worldclockapi.com/api/json/cet/now").request().get();
-        final String jsonObject = res.readEntity(String.class);
-        return Json.createReader(new ByteArrayInputStream(jsonObject.getBytes())).readObject().getString("currentDateTime");
     }
 
 }
