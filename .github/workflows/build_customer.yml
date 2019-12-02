@@ -22,8 +22,8 @@ jobs:
       working-directory: workshop/content/src/customer
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build . --file Dockerfile --tag docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
-        docker push docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
+        docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_USERNAME }}/lab-ossm-customer:${{ github.sha }}
+        docker push docker.io/${{ secrets.DOCKER_USERNAME }}/lab-ossm-customer:${{ github.sha }}
     - name: Deploy preview
       uses: maistra/istio-workspace-action@master
       with:
@@ -34,4 +34,4 @@ jobs:
         namespace: workspace-demo
         deployment: customer-v1
         route: header:ike-session-id=${{ github.head_ref }}
-        image: docker.io/aslakknutsen/lab-ossm-customer:${{ github.sha }}
+        image: docker.io/${{ secrets.DOCKER_USERNAME }}/lab-ossm-customer:${{ github.sha }}
