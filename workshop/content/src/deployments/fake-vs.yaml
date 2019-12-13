@@ -4,7 +4,7 @@ metadata:
   name: customer-feature-x
 spec:
   hosts:
-  - 'feature-x.redhat-kubecon.io'
+  - 'feature-x.ike-demo.io'
   gateways:
   - customer-gateway
   http:
@@ -25,7 +25,7 @@ metadata:
   name: customer-feature-y
 spec:
   hosts:
-  - 'feature-y.redhat-kubecon.io'
+  - 'feature-y.ike-demo.io'
   gateways:
   - customer-gateway
   http:

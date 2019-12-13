@@ -11,5 +11,5 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "redhat-kubecon.io"
-    - "*.redhat-kubecon.io"
+    - "ike-demo.io"
+    - "*.ike-demo.io"
