@@ -1,20 +1,17 @@
 package com.redhat.developer.demos.recommendation.rest;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import javax.json.Json;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/")
 public class RecommendationResource {
