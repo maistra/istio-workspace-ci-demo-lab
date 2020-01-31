@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 @Path("/")
 public class RecommendationResource {
 
-    private static final String RESPONSE_STRING_FORMAT = "recommendation %s from '%s': %d\n";
+    private static final String RESPONSE_STRING_FORMAT = "GH PR recommendation %s from '%s': %d\n";
 
     private static final String RESPONSE_STRING_NOW_FORMAT = "recommendation v3 %s from '%s': %d\n";
 
