@@ -18,16 +18,16 @@ oc get ServiceMeshMemberRoll default -n ${ISTIO_NS} -o json | jq --arg PROJECT "
 IKE_DOCKER_REGISTRY=docker.io IKE_DOCKER_REPOSITORY=aslakknutsen NAMESPACE=${PROJECT} IKE_IMAGE_TAG=latest ike install-operator -l -n ${PROJECT}
 
 # deploy gateway
-oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/gateway.yaml
+oc apply -n ${PROJECT} -f ${DEPLOYMENT_DIR}/gateway.yaml
 
 # deploy customer
-oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/customer.yaml
+oc apply -n ${PROJECT} -f ${DEPLOYMENT_DIR}/customer.yaml
 
 # deploy preferences
-oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/preference.yaml
+oc apply -n ${PROJECT} -f ${DEPLOYMENT_DIR}/preference.yaml
 
 # deploy recommendation
-oc create -n ${PROJECT} -f ${DEPLOYMENT_DIR}/recommendation.yaml
+oc apply -n ${PROJECT} -f ${DEPLOYMENT_DIR}/recommendation.yaml
 
 # deploy fake hosts
 oc apply -n ${PROJECT} -f ${DEPLOYMENT_DIR}/fake-vs.yaml
