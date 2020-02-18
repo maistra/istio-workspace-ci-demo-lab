@@ -46,7 +46,7 @@ metadata:
   name: customer-feature-z
 spec:
   hosts:
-  - 'feature-z.redhat-kubecon.io'
+  - 'feature-z.ike-demo.io'
   gateways:
   - customer-gateway
   http:
