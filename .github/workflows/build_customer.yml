@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
     paths:
-      - 'workshop/content/src/customer/*'
+      - 'workshop/content/src/customer/**'
 
 jobs:
   build:
