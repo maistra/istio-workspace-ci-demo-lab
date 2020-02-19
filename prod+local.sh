@@ -6,12 +6,12 @@ curl -s ike-demo.io
 echo ""
 echo "#### LOCAL"
 
-curl -s feature-y.ike-demo.io
+curl -s feature-y.ike-demo.io | grep --color=always -e "^" -e "PR\|localhost\|LOCAL"
 
 echo ""
 echo "#### PULLREQUEST"
 
-curl -s feature-x.ike-demo.io
+curl -s feature-x.ike-demo.io | grep --color=always -e "^" -e "PR\|localhost\|LOCAL"
 
 #echo ""
 #echo "#### PULLREQUEST 2"
